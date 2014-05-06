@@ -1,0 +1,40 @@
+#include<iostream>
+using namespace std;
+
+char sum[103];
+char add[101];
+char temp[101];
+
+int main()
+{   
+    int i, j;
+    cin>>temp;
+    for(i = strlen(temp) - 1, j = 0; i >= 0; --i, ++j)
+        sum[j] = temp[i];
+    for(; j < 103; j++) sum[j] = 0;
+    
+    while(cin>>temp && temp[0] != '0')
+    {
+        for(i = strlen(temp) - 1, j = 0; i >= 0; --i, ++j)
+            add[j] = temp[i];        
+        for(i = 0; i < strlen(add); i++)
+        {
+            sum[i] += add[i] - 48;
+            if(sum[i] > '9')
+            {
+                sum[i + 1] += 1;
+                sum[i] -= 10;
+            }
+        }
+        while(sum[i] > '9')
+        {
+            sum[i + 1] += 1;
+            sum[i] -= 10;
+        }
+    }
+    i = 102;
+    while(sum[i] == 0) -- i;
+    for(; i >= 0; i--) cout<<sum[i];
+    cout<<endl;
+    return 0;
+}
